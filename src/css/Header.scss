@@ -1,12 +1,13 @@
 @use 'common';
 
 .Header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    line-height: 8rem;
+    line-height: 7.9rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     &.on .gnb {
         background: common.$wColor;

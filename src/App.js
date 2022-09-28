@@ -14,6 +14,13 @@ const App = () => {
     const [cart, setCart] = useState([
         { id: 1, itm: "ssssssssssssssssssss", price: 5000 }
     ]);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    //     return () => {
+    //         window.scrollTo(0, 0);
+    //     }
+    // }, []);
+    // 스크롤 자동으로 위로 올라가게 하는 거였는데, 안됨...
     useEffect(() => {
         const url = 'https://desipossa.github.io/shop_cra/assets/data.json'
         const getProduct = async () => {
