@@ -1,13 +1,13 @@
 import React from 'react';
-import MainSlide from '../components/MainSlide'
+import MainSlide from '../components/MainSlide';
+import Itm from '../shop/Itm';
 
-
-const Main = () => {
+const Main = ({ itm }) => {
     return (
-        <div>
+        <>
             <MainSlide />
-        </div>
+        </>
     )
 }
 
-export default Main;
+export default Main
