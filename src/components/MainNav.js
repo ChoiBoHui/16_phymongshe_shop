@@ -15,7 +15,7 @@ const MainNav = ({ shopList }) => {
       <li><Link to='/shopList'>SHOPPING</Link></li>
       {
         ncate.map(ca => {
-          return ca.cate && <li><Link to={'/shopList/' + ca.cate}>{ca.cate}</Link></li>
+          return ca.cate && <li className='list'><Link to={'/shopList/' + ca.cate}>{ca.cate}</Link></li>
         })
       }
       {/* <li><Link to='/shopList/liquid'>liquid</Link></li>

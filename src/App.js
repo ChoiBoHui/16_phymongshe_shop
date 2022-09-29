@@ -12,16 +12,8 @@ import { Route, Routes } from 'react-router-dom';
 //https://desipossa.github.io/shop_cra/assets/data.json
 const App = () => {
     const [itm, setItm] = useState();
-    const [cart, setCart] = useState([
-        { id: 1, itm: "ssssssssssssssssssss", price: 5000 }
-    ]);
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    //     return () => {
-    //         window.scrollTo(0, 0);
-    //     }
-    // }, []);
-    // 스크롤 자동으로 위로 올라가게 하는 거였는데, 안됨...
+    const [cart, setCart] = useState([]);
+
     useEffect(() => {
         const url = 'https://desipossa.github.io/shop_cra/assets/data.json'
         const getProduct = async () => {
@@ -54,7 +46,7 @@ const App = () => {
                     <div className='wapper'>
                         <Header cart={cart} shopList={itm} />
                         <Routes>
-                            <Route path='/' element={<Main />} />
+                            <Route path='/' element={<Main shopList={itm} />} />
                             <Route path='/cart' element={<Cart cart={cart} setCart={setCart} />} />
                             <Route path='/shopList' element={<List shopList={itm} />} />
                             <Route path='/shopList/:cate' element={<Category shopList={itm} />} />
