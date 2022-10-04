@@ -28,7 +28,14 @@ const Itm = ({ shopList, cart, setCart }) => {
 
                         setCart([
                             ...cart,
-                            { id: matchItm.id, itm: matchItm.name, e: 1 }
+                            {
+                                id: matchItm.id,
+                                name: matchItm.name,
+                                des: matchItm.des,
+                                src: matchItm.src,
+                                price: matchItm.price,
+                                e: 1
+                            }
                         ])
                         navigate('/cart')
                     }

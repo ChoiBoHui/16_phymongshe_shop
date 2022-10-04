@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MainCategory = ({ shopList, category }) => {
+const MainCategory = ({ shopList, category, bg }) => {
     const Mainlist = shopList.filter(it => category === it.cate);
     return (
-        <section className='shopList'>
+        <section className={`shopList sc ${bg ? 'bg' : ''}`}>
             <div className='inner'>
                 {
                     Mainlist.map(it => {

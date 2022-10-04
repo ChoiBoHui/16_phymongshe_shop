@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 1000;
     line-height: 7.9rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
@@ -28,7 +28,7 @@
 
             .list {
                 text-transform: uppercase;
-                color: common.$mainColor;
+                color: rgba(0, 0, 0, 0.75);
             }
 
             &.rt {
@@ -64,6 +64,14 @@
         position: absolute;
         top: 0;
         right: 8rem;
+
+        .search {
+            position: absolute;
+            top: 0;
+            left: -50rem;
+            font-size: 1.3rem;
+
+        }
     }
 
 

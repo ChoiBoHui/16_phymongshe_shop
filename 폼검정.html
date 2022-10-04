@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>검수하기</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: "Gothic";
+            font-size: 15px;
+        }
+
+        th {
+            color: darkcyan;
+        }
+
+        td {
+            color: palevioletred;
+            font-size: 0.9em;
+        }
+
+        .hidden {
+            position: absolute;
+            left: 0;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            text-indent: -9999px;
+        }
+    </style>
+    <script>
+        function check() {
+            var frm = document.frm;
+            var reg_id = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+            //정규식 기호는 /정식객체/ 이다. ()는 구분하기위해써준것. ^시작의 의미, $ 끝의 의미.
+            //a-zA-Z 영문자 사용, 0-9 숫자사용 ,{6,0}은 6자리 이상. ?=.* 한번이상은 반복하여라!
+            var reg_pw =
+                /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+            var reg_tel = /^(070|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;
+            //[3-9]{1} 3~9중에 1자리 선택하라는 뜻 |은 or 이라는 뜻이다.
+            var reg_hp = /^(01[016789]{1})[0-9]{4}[0-9]{4}$/;
+
+            //아이디 검수
+            if (!frm.id.value) {
+                alert("아이디를 입력해 주세요!");
+                frm.id.focus();
+                return false;
+            }
+            if (!reg_id.test(frm.id.value)) {
+                alert("아이디는 6자 이상, 영문, 숫자를 포함해야 합니다.");
+                frm.id.focus();
+                return false;
+            }
+
+            //비밀번호 검수
+            if (!frm.pw.value) {
+                alert("비밀번호를 입력하세요!");
+                frm.pw.focus();
+                return false;
+            }
+            if (!reg_pw.test(frm.pw.value)) {
+                alert("비밀번호는 8자이상, 영문, 숫자, 특수문자를 포함해야합니다.");
+                frm.pw.focus();
+                return false;
+            }
+
+            // 비밀번호 재입력 검수
+            if (!frm.repw.value) {
+                alert("비밀번호를 입력하세요!");
+                frm.repw.focus();
+                return false;
+            }
+            if (frm.pw.value != frm.repw.value) {
+                //같지않을때 비교연산자써주기!
+                alert("비밀번호가 같지않습니다. 다시 입력해주세요.");
+                frm.repw.focus();
+                return false;
+            }
+
+            //회사명과 회원명은 안쓴것에 대한 내용만 써줄것!
+            if (!frm.member.value) {
+                alert("회원명을 입력하세요!");
+                frm.member.focus();
+                return false;
+            }
+            if (!frm.company.value) {
+                alert("회사명을 입력하세요!");
+                frm.company.focus();
+                return false;
+            }
+
+            //전화번호 검수
+            if (!frm.tel.value) {
+                alert("전화번호를 입력하세요!");
+                frm.tel.focus();
+                return false;
+            }
+            if (!reg_tel.test(frm.tel.value)) {
+                alert("전화번호 형식을 맞춰주세요.");
+                frm.tel.focus();
+                return false;
+            }
+            // 핸드폰 번호 검수
+            if (!frm.hp.value) {
+                alert("핸드폰번호를 입력하세요!");
+                frm.hp.focus();
+                return false;
+            }
+            if (!reg_hp.test(frm.hp.value)) {
+                alert("핸드폰 번호 형식을 맞춰주세요.");
+                frm.hp.focus();
+                return false;
+            }
+        }
+        function receiveRadio() {
+            var frm = document.frm;
+            var receive = document.getElementById("receive");
+            var reject = document.getElementById("reject");
+            receive.onclick = function () {
+                for (var i = 0; i < frm.length; i++) {
+                    if (frm[i].type == "checkbox") {
+                        frm[i].checked = true;
+                        frm[i].disabled = false;
+                    }
+                }
+            };
+            reject.onclick = function () {
+                //수신거부를 됬을때는 체크박스가 비활성화 되어야한다.
+
+                for (var i = 0; i < frm.length; i++) {
+                    if (frm[i].type == "checkbox") {
+                        frm[i].checked = false;
+                        frm[i].disabled = true;
+                    }
+                }
+            };
+        }
+        if (window.attachEvent) {
+            //ie8이하
+            window.attachEvent("onload", receiveRadio);
+        } else {
+            //ie8 이상
+            window.addEventListener("load", receiveRadio);
+        }
+    </script>
+</head>
+
+<body>
+    <form action="#" name="frm" method="post" onsubmit="return check()">
+        <table>
+            <caption class="hidden">
+                회원가입서식
+            </caption>
+            <colgroup>
+                <col />
+                <col />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row"><label for="id">아이디</label></th>
+                    <td>
+                        <input type="text" id="id" title="아이디 입력" name="id" /><strong>아이디는 6자 이상, 영문, 숫자 사용</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="pw">비밀번호</label></th>
+                    <td>
+                        <input type="password" id="pw" title="비밀번호 입력" name="pw" /><strong>비밀번호는 8자 이상, 영문, 숫자, 특수문자 사용
+                            사용</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="repw">비밀번호 재입력</label></th>
+                    <td>
+                        <input type="password" id="repw" title="비밀번호 재입력" name="repw" />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="member">회원명</label></th>
+                    <td>
+                        <input type="text" id="member" title="회원명 입력" name="member" />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="company">회사명</label></th>
+                    <td>
+                        <input type="text" id="company" title="회사명 입력" name="company" />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tel">전화번호</label></th>
+                    <td>
+                        <input type="text" id="tel" title="전화번호 입력" name="tel" placeholder="ex) 02-123-4567" />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="hp">휴대폰번호입력</label></th>
+                    <td>
+                        <input type="text" id="hp" title="휴대폰번호 입력" name="hp" placeholder="ex) 010-1234-5678" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>관심분야 메일 수신여부</th>
+                    <td>
+                        <input type="radio" id="receive" name="receive" checked /><label for="receive">수신</label>
+                        <!--xhtml에서는 checked 속성에서는 checked라는 값을 입력해야한다. -->
+                        <input type="checkbox" id="html" name="html" /><label for="html">html</label>
+                        <input type="checkbox" id="css" name="css" /><label for="css">css</label>
+                        <input type="checkbox" id="javascript" name="javascript" /><label
+                            for="javascript">javascript</label>
+                        <input type="radio" id="reject" name="receive" /><label for="reject">수신거부</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <input type="submit" value="가입" /><input type="reset" value="취소" />
+        </div>
+    </form>
+</body>
+
+</html>
